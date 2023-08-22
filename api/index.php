@@ -1,4 +1,8 @@
 <?php
+header("Access-Control-Allow-Origin: https://web1-21880277.vercel.app");
+header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type");
+
 $_POST = json_decode(file_get_contents('php://input'), true);
 
 if (isset($_POST) && isset($_POST['g-token'])) {
@@ -10,10 +14,8 @@ if (isset($_POST) && isset($_POST['g-token'])) {
     $request = file_get_contents($url);
     $response = json_decode($request); 
 
-    header("Access-Control-Allow-Origin: https://web1-21880277.vercel.app");
-    header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-    header("Access-Control-Allow-Headers: Content-Type");
     
+
     if ($response->success && $response->action == 'submit' && $response->score >= 0.5) {
         header('HTTP/1.1 200 OK');
     } else {
